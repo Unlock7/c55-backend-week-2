@@ -1,7 +1,12 @@
 package com.hyfacademy;
 
+import com.hyfacademy.exception.AlreadyEnrolledException;
+import com.hyfacademy.exception.EnrolmentException;
+
+
+
 public class Main {
-    static void main(String[] args) {
-        System.out.println("Hello World!");
+    public static void main(String[] args) {
+
     }
 }
