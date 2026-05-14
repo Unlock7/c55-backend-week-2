@@ -1,7 +1,11 @@
 package com.hyfacademy.model;
 
 
-public class LiveCohortCourse extends Course {
+import com.hyfacademy.service.Reportable;
+
+import java.security.PublicKey;
+
+public class LiveCohortCourse extends Course implements Reportable {
 
     private String startDate;
     private String endDate;
@@ -23,6 +27,18 @@ public class LiveCohortCourse extends Course {
         String mentorName = (mentor != null) ? mentor.getName() : "No mentor assigned";
         return startDate + " to " + endDate + " | Mentor: " + mentorName;
     }
+
+    @Override
+    public String generateReport() {
+        String mentorName = (mentor != null) ? mentor.getName() : "No mentor assigned";
+
+        return "Course: " + getCourseName() + "\n" +
+                "Type: " + getCourseType() + "\n" +
+                "Schedule: " + startDate + " to " + endDate + "\n" +
+                "Mentor: " + mentorName + "\n" +
+                "Status: " + capacityStatus();
+    }
+    
 
     public void assignMentor(Mentor mentor) {
         this.mentor = mentor;
