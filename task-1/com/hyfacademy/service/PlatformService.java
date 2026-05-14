@@ -19,9 +19,7 @@ public class PlatformService {
 
     private Scanner scanner = new Scanner(System.in);
 
-    // ---------------------------------------------------------
-    // Main Menu Loop
-    // ---------------------------------------------------------
+
     public void run() {
         boolean running = true;
 
@@ -75,9 +73,6 @@ public class PlatformService {
         System.out.println("══════════════════════════════════════════");
     }
 
-    // ---------------------------------------------------------
-    // Add Course
-    // ---------------------------------------------------------
     private void addCourse() {
         if (courseCount >= courses.length) {
             System.out.println("Error: Cannot add more courses (limit reached).");
@@ -140,9 +135,7 @@ public class PlatformService {
         System.out.println("Course added.");
     }
 
-    // ---------------------------------------------------------
-    // Add Student
-    // ---------------------------------------------------------
+
     private void addStudent() {
         if (studentCount >= students.length) {
             System.out.println("Error: Cannot add more students (limit reached).");
@@ -160,9 +153,7 @@ public class PlatformService {
         System.out.println("Student created with ID: " + s.getUserId());
     }
 
-    // ---------------------------------------------------------
-    // Add Mentor
-    // ---------------------------------------------------------
+
     private void addMentor() {
         if (mentorCount >= mentors.length) {
             System.out.println("Error: Cannot add more mentors (limit reached).");
@@ -182,9 +173,7 @@ public class PlatformService {
         System.out.println("Mentor created with ID: " + m.getUserId());
     }
 
-    // ---------------------------------------------------------
-    // Helper Finders
-    // ---------------------------------------------------------
+
     private Student findStudentById(String id) {
         for (int i = 0; i < studentCount; i++) {
             if (students[i].getUserId().equalsIgnoreCase(id)) {
@@ -203,9 +192,6 @@ public class PlatformService {
         return null;
     }
 
-    // ---------------------------------------------------------
-    // Enrol Student
-    // ---------------------------------------------------------
     private void enrolStudent() {
         System.out.print("Student ID: ");
         String studentId = scanner.nextLine();
@@ -234,9 +220,6 @@ public class PlatformService {
         }
     }
 
-    // ---------------------------------------------------------
-    // Update Progress
-    // ---------------------------------------------------------
     private void updateProgress() {
         System.out.print("Student ID: ");
         String studentId = scanner.nextLine();
@@ -278,9 +261,6 @@ public class PlatformService {
         }
     }
 
-    // ---------------------------------------------------------
-    // View All Courses
-    // ---------------------------------------------------------
     private void viewAllCourses() {
         System.out.println("══════════════════════════════════════════════════════════════════");
         System.out.println("  ID        NAME                      TYPE           CAPACITY");
@@ -293,9 +273,6 @@ public class PlatformService {
         System.out.println("══════════════════════════════════════════════════════════════════");
     }
 
-    // ---------------------------------------------------------
-    // View Course Report
-    // ---------------------------------------------------------
     private void viewCourseReport() {
         System.out.print("Course ID: ");
         String courseId = scanner.nextLine();
@@ -313,9 +290,6 @@ public class PlatformService {
         }
     }
 
-    // ---------------------------------------------------------
-    // View All Students
-    // ---------------------------------------------------------
     private void viewAllStudents() {
         System.out.println("══════════════════════════════════════════");
         System.out.println("  STUDENTS");
