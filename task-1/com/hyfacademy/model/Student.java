@@ -1,11 +1,10 @@
 package com.hyfacademy.model;
-import com.hyfacademy.exception.*;
 
-import com.hyfacademy.model.User;
-import com.hyfacademy.model.Course;
+import com.hyfacademy.exception.AlreadyEnrolledException;
 import com.hyfacademy.exception.EnrolmentException;
 
 public class Student extends User {
+
     private static int counter = 1;
 
     private Course[] enrolledCourses = new Course[5];
@@ -19,23 +18,30 @@ public class Student extends User {
     public String getRole() {
         return "STUDENT";
     }
-    public void enrol(Course course) {
 
+    public void enrol(Course course) throws EnrolmentException {
+
+        // Student limit
         if (courseCount >= 5) {
-            throw new EnrolmentException("Student course list full (max 5 courses allowed).");
+            throw new EnrolmentException(
+                    getName() + " cannot enrol in more than 5 courses"
+            );
         }
 
+        // Already enrolled?
         for (int i = 0; i < courseCount; i++) {
-            if (enrolledCourses[i] != null &&
-                    enrolledCourses[i].getCourseId().equals(course.getCourseId())) {
-                throw new EnrolmentException("Already enrolled in: " + course.getCourseName());
+            if (enrolledCourses[i].getCourseId().equals(course.getCourseId())) {
+                throw new AlreadyEnrolledException(
+                        getName(),
+                        course.getCourseName()
+                );
             }
         }
 
         enrolledCourses[courseCount++] = course;
     }
 
-    public Course[] getEnrolledCourses() {
+    public Course[] getCourses() {
         return enrolledCourses;
     }
 
@@ -43,12 +49,16 @@ public class Student extends User {
         return courseCount;
     }
 
-    public int getProgress(String courseName) {
+    public int getProgress(String courseName) throws EnrolmentException {
         for (int i = 0; i < courseCount; i++) {
             if (enrolledCourses[i].getCourseName().equalsIgnoreCase(courseName)) {
-                return enrolledCourses[i].getStudentProgress(this.getUserId()userId());
+                return enrolledCourses[i].getStudentProgress(this);
             }
         }
-        throw new EnrolmentException("Student is not enrolled in course: " + courseName);
+
+        throw new EnrolmentException(
+                getName() + " is not enrolled in course '" + courseName + "'"
+        );
     }
 }
+

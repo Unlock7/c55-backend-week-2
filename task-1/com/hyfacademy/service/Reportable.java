@@ -1,6 +1,6 @@
 package com.hyfacademy.service;
 
-public class Reportable {
+public interface Reportable {
 
     String generateReport();
 
