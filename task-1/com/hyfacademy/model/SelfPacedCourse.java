@@ -46,8 +46,19 @@ public class SelfPacedCourse extends Course implements Reportable {
             );
         }
 
+        System.out.println("──────────────────────────────────────────");
+
+        int total = 0;
+        for (int i = 0; i < getEnrolledCount(); i++) {
+            total += studentProgress[i];
+        }
+
+        int avg = (getEnrolledCount() == 0) ? 0 : total / getEnrolledCount();
+        System.out.println("  Avg Progress : " + avg + "%");
+
         System.out.println("══════════════════════════════════════════");
-        return "";
+
+         return " ";
     }
 }
 
