@@ -34,7 +34,7 @@ public class PlatformService {
             try {
                 choice = scanner.nextInt();
             } catch (InputMismatchException e) {
-                System.out.println("❌ Please enter a valid number.");
+                System.out.println("Error: Please enter a valid number.");
             } finally {
                 scanner.nextLine(); // clear buffer
             }
@@ -52,7 +52,7 @@ public class PlatformService {
                     System.out.println("Exiting... Goodbye!");
                     running = false;
                 }
-                default -> System.out.println("❌ Invalid option. Try again.");
+                default -> System.out.println("Error: Invalid option. Try again.");
             }
 
             System.out.println();
@@ -80,7 +80,7 @@ public class PlatformService {
     // ---------------------------------------------------------
     private void addCourse() {
         if (courseCount >= courses.length) {
-            System.out.println("❌ Cannot add more courses (limit reached).");
+            System.out.println("Error: Cannot add more courses (limit reached).");
             return;
         }
 
@@ -90,7 +90,7 @@ public class PlatformService {
         try {
             type = scanner.nextInt();
         } catch (InputMismatchException e) {
-            System.out.println("❌ Invalid type.");
+            System.out.println("Error: Invalid type.");
             scanner.nextLine();
             return;
         }
@@ -104,7 +104,7 @@ public class PlatformService {
         try {
             max = scanner.nextInt();
         } catch (InputMismatchException e) {
-            System.out.println("❌ Max students must be a number.");
+            System.out.println("Error: Max students must be a number.");
             scanner.nextLine();
             return;
         }
@@ -116,7 +116,7 @@ public class PlatformService {
             try {
                 hours = scanner.nextInt();
             } catch (InputMismatchException e) {
-                System.out.println("❌ Estimated hours must be a number.");
+                System.out.println("Error: Estimated hours must be a number.");
                 scanner.nextLine();
                 return;
             }
@@ -133,11 +133,11 @@ public class PlatformService {
             courses[courseCount++] = new LiveCohortCourse(name, max, start, end);
 
         } else {
-            System.out.println("❌ Unknown course type.");
+            System.out.println("Error: Unknown course type.");
             return;
         }
 
-        System.out.println("✅ Course added.");
+        System.out.println("Course added.");
     }
 
     // ---------------------------------------------------------
@@ -145,7 +145,7 @@ public class PlatformService {
     // ---------------------------------------------------------
     private void addStudent() {
         if (studentCount >= students.length) {
-            System.out.println("❌ Cannot add more students (limit reached).");
+            System.out.println("Error: Cannot add more students (limit reached).");
             return;
         }
 
@@ -157,7 +157,7 @@ public class PlatformService {
         Student s = new Student(name, email);
         students[studentCount++] = s;
 
-        System.out.println("✅ Student created with ID: " + s.getUserId());
+        System.out.println("Student created with ID: " + s.getUserId());
     }
 
     // ---------------------------------------------------------
@@ -165,7 +165,7 @@ public class PlatformService {
     // ---------------------------------------------------------
     private void addMentor() {
         if (mentorCount >= mentors.length) {
-            System.out.println("❌ Cannot add more mentors (limit reached).");
+            System.out.println("Error: Cannot add more mentors (limit reached).");
             return;
         }
 
@@ -179,7 +179,7 @@ public class PlatformService {
         Mentor m = new Mentor(name, email, expertise);
         mentors[mentorCount++] = m;
 
-        System.out.println("✅ Mentor created with ID: " + m.getUserId());
+        System.out.println("Mentor created with ID: " + m.getUserId());
     }
 
     // ---------------------------------------------------------
@@ -216,21 +216,21 @@ public class PlatformService {
         Course c = findCourseById(courseId);
 
         if (s == null) {
-            System.out.println("❌ Student not found.");
+            System.out.println("Error: Student not found.");
             return;
         }
         if (c == null) {
-            System.out.println("❌ Course not found.");
+            System.out.println("Error: Course not found.");
             return;
         }
 
         try {
             c.enrol(s);
-            System.out.println("✅ Student enrolled successfully.");
+            System.out.println("Student enrolled successfully.");
         } catch (CourseFullException | AlreadyEnrolledException e) {
-            System.out.println("❌ " + e.getMessage());
+            System.out.println("Error " + e.getMessage());
         } catch (EnrolmentException e) {
-            System.out.println("❌ " + e.getMessage());
+            System.out.println("Error " + e.getMessage());
         }
     }
 
@@ -247,11 +247,11 @@ public class PlatformService {
         Course c = findCourseById(courseId);
 
         if (s == null) {
-            System.out.println("❌ Student not found.");
+            System.out.println("Error: Student not found.");
             return;
         }
         if (c == null) {
-            System.out.println("❌ Course not found.");
+            System.out.println("Error: Course not found.");
             return;
         }
 
@@ -261,7 +261,7 @@ public class PlatformService {
         try {
             progress = scanner.nextInt();
         } catch (InputMismatchException e) {
-            System.out.println("❌ Progress must be a number.");
+            System.out.println("Progress must be a number.");
             scanner.nextLine();
             return;
         } finally {
@@ -270,11 +270,11 @@ public class PlatformService {
 
         try {
             c.updateProgress(s, progress);
-            System.out.println("✅ Progress updated.");
+            System.out.println("Progress updated.");
         } catch (InvalidProgressException e) {
-            System.out.println("❌ " + e.getMessage());
+            System.out.println("Error: " + e.getMessage());
         } catch (EnrolmentException e) {
-            System.out.println("❌ " + e.getMessage());
+            System.out.println("Error: " + e.getMessage());
         }
     }
 
@@ -302,14 +302,14 @@ public class PlatformService {
 
         Course c = findCourseById(courseId);
         if (c == null) {
-            System.out.println("❌ Course not found.");
+            System.out.println(" Course not found.");
             return;
         }
 
         if (c instanceof Reportable r) {
             r.generateReport();
         } else {
-            System.out.println("❌ This course does not support reporting.");
+            System.out.println("This course does not support reporting.");
         }
     }
 
@@ -323,7 +323,7 @@ public class PlatformService {
 
         for (int i = 0; i < studentCount; i++) {
             Student s = students[i];
-            System.out.printf("  %-8s %-20s Courses: %d%n",
+            System.out.printf(" %-8s %-20s Courses: %d%n",
                     s.getUserId(),
                     s.getName(),
                     s.getCourseCount());
