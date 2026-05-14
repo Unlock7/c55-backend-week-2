@@ -1,4 +1,7 @@
 package com.hyfacademy.service;
 
-public class Enrollable {
+import com.hyfacademy.model.Student;
+
+public abstract class Enrollable {
+    public abstract void enrol(Student student);
 }
